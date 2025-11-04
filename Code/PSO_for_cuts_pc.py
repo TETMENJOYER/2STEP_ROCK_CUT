@@ -140,29 +140,29 @@ class PSO:
         total_best_score = np.sum(self.global_best_scores)
         return self.all_pattern2, total_best_score
 
+if __name__ == "main":
+    # Инициализация PSO
+    pso = PSO(func, bounds, n_particles_per_fig=20, max_iter=200, n_figures=n)
+    best_positions, best_score = pso.optimize()
 
-# Инициализация PSO
-pso = PSO(func, bounds, n_particles_per_fig=20, max_iter=200, n_figures=n)
-best_positions, best_score = pso.optimize()
+    print(f"Оптимальные позиции: \n{best_positions}")
+    print(f"Значение функции качества: {best_score}")
 
-print(f"Оптимальные позиции: \n{best_positions}")
-print(f"Значение функции качества: {best_score}")
+    # Визуализация
+    fig, ax = plt.subplots()
 
-# Визуализация
-fig, ax = plt.subplots()
+    polygon = patches.Polygon(slab, closed=True, fill=True, edgecolor='blue', facecolor='lightblue', alpha=0.5)
+    ax.add_patch(polygon)
 
-polygon = patches.Polygon(slab, closed=True, fill=True, edgecolor='blue', facecolor='lightblue', alpha=0.5)
-ax.add_patch(polygon)
-
-for pos in best_positions:
-    rect = patches.Polygon(real_real_cords(pos), closed=True, fill=True, edgecolor='blue', facecolor='cyan', alpha=0.5)
-    ax.add_patch(rect)
+    for pos in best_positions:
+        rect = patches.Polygon(real_real_cords(pos), closed=True, fill=True, edgecolor='blue', facecolor='cyan', alpha=0.5)
+        ax.add_patch(rect)
 
 
-ax.set_xlim(0, 3)
-ax.set_ylim(0, 3)
-ax.set_aspect('equal')
-ax.grid(True)
-ax.set_axis_off()
+    ax.set_xlim(0, 3)
+    ax.set_ylim(0, 3)
+    ax.set_aspect('equal')
+    ax.grid(True)
+    ax.set_axis_off()
 
-plt.show()
+    plt.show()
